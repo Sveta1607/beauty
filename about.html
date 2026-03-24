@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Об авторе Beauty University — Катя Иваха." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Об авторе — Beauty University</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__brand">
+        <a href="index.html">Beauty University</a>
+      </div>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Открыть меню">
+        ☰
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Основная навигация">
+        <a href="index.html">Beauty University</a>
+        <a href="format.html">О формате</a>
+        <a href="awaiting.html">Что тебя ждёт</a>
+        <a href="tariffs.html">Тарифы</a>
+        <a href="about.html" aria-current="page">Об авторе</a>
+        <a href="exclusion.html">Исключение с канала</a>
+      </nav>
+    </header>
+
+    <main class="page-wrap">
+      <h1 class="page-title">Об авторе</h1>
+
+      <!-- Сетка: текст о Кате Ивахе + визуальный блок под фото -->
+      <div class="about-grid">
+        <article class="panel">
+          <p style="font-size: 1.05rem; font-weight: 600">
+            Одну минуту — расскажу о себе главное: что стало возможным в моей жизни благодаря любви к своему делу, чему
+            я научу вас на курсе.
+          </p>
+          <div class="num-row">
+            <span class="num-badge">1</span>
+            <span>Меня зовут <strong>Катя Иваха</strong> — визажист и стилист.</span>
+          </div>
+          <div class="num-row">
+            <span class="num-badge num-badge--pink">2</span>
+            <span>Более 10 лет в профессии и постоянная практика.</span>
+          </div>
+          <div class="num-row">
+            <span class="num-badge num-badge--muted">3</span>
+            <span>Собственная студия <strong>IT GIRL</strong> в Новосибирске.</span>
+          </div>
+          <div class="num-row">
+            <span class="num-badge num-badge--blue">4</span>
+            <span>Работа со съёмками и известными лицами, высокая загрузка по записям.</span>
+          </div>
+          <div class="num-row">
+            <span class="num-badge">5</span>
+            <span>Активное комьюнити в соцсетях — делюсь техниками и вдохновением (например, <strong>@katyaivahaaa</strong>).</span>
+          </div>
+          <p style="margin-bottom: 0">
+            Вместе с <strong>Ольгой Пулих</strong> мы ведём закрытый канал Beauty University и отвечаем на ваши вопросы,
+            чтобы обучение было тёплым и по делу.
+          </p>
+        </article>
+        <!-- Фото автора в декоративной рамке рядом с текстом -->
+        <div class="about-photo">
+          <img
+            class="about-photo__img"
+            src="https://optim.tildacdn.com/tild6661-3536-4438-b934-353130633133/-/resize/578x/-/format/webp/photo.png.webp"
+            alt="Катя Иваха — визажист и стилист, автор Beauty University"
+            width="578"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>© Beauty University</p>
+      <p><a href="#">Публичная оферта</a> · <a href="#">Политика обработки персональных данных</a></p>
+    </footer>
+
+    <script type="module" src="/src/nav.js"></script>
+  </body>
+</html>

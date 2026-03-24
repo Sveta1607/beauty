@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="О формате закрытого обучающего канала Beauty University." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>О формате — Beauty University</title>
+  </head>
+  <body>
+    <!-- Шапка с горизонтальным меню -->
+    <header class="site-header">
+      <div class="site-header__brand">
+        <a href="index.html">Beauty University</a>
+      </div>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Открыть меню">
+        ☰
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Основная навигация">
+        <a href="index.html">Beauty University</a>
+        <a href="format.html" aria-current="page">О формате</a>
+        <a href="awaiting.html">Что тебя ждёт</a>
+        <a href="tariffs.html">Тарифы</a>
+        <a href="about.html">Об авторе</a>
+        <a href="exclusion.html">Исключение с канала</a>
+      </nav>
+    </header>
+
+    <main class="page-wrap">
+      <!-- Сетка: текст о формате + фото из макета заказчика -->
+      <!-- Панель «О формате»: сетка текста и фото + доп. иллюстрация внизу -->
+      <article class="panel">
+        <div class="format-layout">
+          <div class="format-layout__text">
+            <h1 class="page-title">О формате</h1>
+            <p>
+              Обучающий закрытый канал, где вы будете погружаться в мир ухода за собой, макияжа, красивых волос и стиля.
+            </p>
+            <p>
+              Каждую неделю вас будет ждать обучающий видеоматериал, а также вдохновляющие и полезные посты, тренирующие
+              насмотренность.
+            </p>
+            <p>
+              А также прямые эфиры и уроки от других спикеров (профстилист, врач-косметолог, парикмахер-колорист и т.д.).
+            </p>
+            <p style="margin-bottom: 0">
+              Неспешный темп обеспечит глубинное изучение материала и при этом не будет отвлекать от ваших повседневных
+              дел.
+            </p>
+          </div>
+          <!-- Фото справа: локальная копия с 1001sovety — с внешнего URL часто блокируют показ на чужих сайтах -->
+          <figure class="format-layout__figure">
+            <img
+              class="format-layout__img"
+              src="./images/format-makiyazh-29.jpg"
+              alt="Вдохновляющий образ в духе материалов канала"
+              width="600"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
+        <!-- Второе фото внизу информационного блока по запросу -->
+        <figure class="format-layout__bottom-figure">
+          <img
+            class="format-layout__bottom-img"
+            src="https://ir.ozone.ru/s3/multimedia-7/c1000/6050072911.jpg"
+            alt="Дополнительная иллюстрация к разделу о формате"
+            width="1000"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <p>© Beauty University</p>
+      <p><a href="#">Публичная оферта</a> · <a href="#">Политика обработки персональных данных</a></p>
+    </footer>
+
+    <script type="module" src="/src/nav.js"></script>
+  </body>
+</html>

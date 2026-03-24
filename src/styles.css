@@ -1,0 +1,805 @@
+/* Глобальные токены: единый фирменный розовый #f68fd9 и спокойные акценты для шапки и кнопок */
+:root {
+  --pink-bright: #f68fd9;
+  --pink-soft: #fdd7f2;
+  --magenta-deep: #b84aa8;
+  --magenta-dark: #7d2f6f;
+  --ink: #1a1216;
+  --paper: #fff8fd;
+  --text-on-dark: #ffffff;
+  --footer-bg: #5c2860;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, Cantarell, sans-serif;
+  --radius: 14px;
+  --shadow: 0 12px 32px rgba(93, 35, 88, 0.2);
+}
+
+/* Сброс бокса и базовая типографика для всего сайта */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+  overflow-x: clip;
+}
+
+/* Колонка на всю высоту окна: основной контент растягивается, футер прижат к низу экрана */
+body {
+  margin: 0;
+  min-height: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--pink-bright);
+  line-height: 1.55;
+}
+
+/* Шапка не сжимается по высоте */
+body > .site-header {
+  flex-shrink: 0;
+}
+
+/* Центральная часть забирает свободное место, чтобы подвал оказался внизу при коротком тексте */
+body > main {
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+/* Подвал в конце колонки, не сжимается */
+body > .site-footer {
+  flex-shrink: 0;
+}
+
+/* Скрипт в конце body не должен участвовать в flex (иначе футер съезжает) */
+body > script {
+  display: none;
+}
+
+/* Обёртка контента: ограничиваем ширину и центрируем колонку */
+.page-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.25rem 3rem;
+}
+
+/* Шапка: логотип слева, пункты меню в один ряд слева направо */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem 1rem;
+  padding: 0.85rem 1.25rem;
+  background: linear-gradient(135deg, var(--magenta-deep), var(--magenta-dark));
+  color: var(--text-on-dark);
+  box-shadow: 0 5px 22px rgba(74, 10, 45, 0.28);
+}
+
+/* Бренд в шапке — ссылка на главную */
+.site-header__brand {
+  flex: 0 0 auto;
+}
+
+.site-header__brand a {
+  color: inherit;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
+}
+
+.site-header__brand a:hover {
+  text-decoration: underline;
+}
+
+/* Кнопка бургера: видна только на узких экранах */
+.nav-toggle {
+  display: none;
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 0.45rem 0.65rem;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.nav-toggle:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Навигация: горизонтальный ряд вкладок слева направо сразу после бренда */
+.site-nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex: 1;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.site-nav a {
+  display: inline-block;
+  padding: 0.4rem 0.65rem;
+  border-radius: 999px;
+  color: inherit;
+  text-decoration: none;
+  font-size: clamp(0.72rem, 1.5vw, 0.88rem);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.site-nav a:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Текущая страница в меню */
+.site-nav a[aria-current='page'] {
+  background: rgba(255, 255, 255, 0.28);
+  pointer-events: none;
+}
+
+/* Адаптив: на узком экране меню сворачивается под бургер */
+@media (max-width: 1100px) {
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .site-nav {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.25rem;
+  }
+
+  .site-nav.is-open {
+    display: flex;
+  }
+
+  .site-nav a {
+    white-space: normal;
+    border-radius: var(--radius);
+  }
+}
+
+/* Подвал сайта: отступ сверху от контента на длинных страницах; позиция внизу задаётся flex у body + main */
+/* Подвал: тёмный фон; сверху «рваный» срез от цвета страницы через псевдоэлемент */
+.site-footer {
+  position: relative;
+  margin-top: 3.25rem;
+  padding: 1.75rem 1.25rem 2rem;
+  background: var(--footer-bg);
+  color: var(--pink-soft);
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.site-footer::before {
+  content: '';
+  display: block;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  height: clamp(40px, 7vw, 56px);
+  margin-top: calc(-1 * clamp(40px, 7vw, 56px));
+  margin-bottom: 1.25rem;
+  line-height: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 56' preserveAspectRatio='none'%3E%3Cpath fill='%235c2860' d='M0,18 L75,6 L150,22 L225,8 L300,24 L375,10 L450,26 L525,12 L600,20 L675,8 L750,24 L825,14 L900,22 L975,10 L1050,26 L1125,16 L1200,20 L1200,56 L0,56 Z'/%3E%3C/svg%3E")
+    no-repeat center / 100% 100%;
+}
+
+.site-footer a {
+  color: var(--text-on-dark);
+}
+
+/* Карточка/секция на светлом фоне */
+.panel {
+  background: var(--paper);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.35rem;
+  margin-top: 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+/* Тёмная полоса как на референсе (уроки) */
+.panel--dark {
+  background: var(--ink);
+  color: var(--text-on-dark);
+}
+
+/* Розовая полоса бонусов */
+.panel--bonus {
+  background: var(--pink-soft);
+  color: var(--ink);
+}
+
+/* Заголовок страницы */
+.page-title {
+  margin: 1.5rem 0 0.5rem;
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* Заголовок героя на цветном фоне страницы — без «белой» обводки текста */
+.page-title--on-hero {
+  text-shadow: none;
+  color: var(--ink);
+}
+
+/* Подзаголовок секции */
+.section-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+/* «Рваная» плашка под заголовок тарифа/модуля */
+.torn-label {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1.25rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  clip-path: polygon(
+    0% 12%,
+    8% 0%,
+    22% 8%,
+    40% 0%,
+    58% 10%,
+    78% 2%,
+    94% 12%,
+    100% 28%,
+    96% 48%,
+    100% 68%,
+    94% 88%,
+    72% 100%,
+    48% 92%,
+    26% 100%,
+    6% 90%,
+    0% 72%
+  );
+  filter: drop-shadow(0 4px 0 rgba(0, 0, 0, 0.08));
+}
+
+.panel--dark .torn-label {
+  background: #fff;
+}
+
+/* Кнопка CTA */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-on-dark);
+  background: linear-gradient(95deg, var(--magenta-deep), var(--pink-bright));
+  box-shadow: 0 6px 20px rgba(93, 35, 88, 0.28);
+}
+
+.btn:hover {
+  filter: brightness(1.06);
+}
+
+.btn--ghost {
+  background: transparent;
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  box-shadow: none;
+}
+
+/* Герой главной: сетка текст + фото; колонки по высоте тянутся к самой высокой — под фото остаётся место сверху */
+.hero {
+  display: grid;
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-top: 1.5rem;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Левая колонка героя: только типографика на фоне body */
+.hero__copy {
+  min-width: 0;
+}
+
+/* На десктопе фото шире колонки текста — крупнее и заметнее */
+@media (min-width: 768px) {
+  .hero {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.28fr);
+    gap: 1.75rem;
+    align-items: stretch;
+  }
+}
+
+/* Коллажные буквы заголовка на главной */
+.collage-title {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: flex-end;
+  margin: 0 0 0.5rem;
+}
+
+.collage-title span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0 0.35rem;
+  font-weight: 900;
+  font-size: 1.35rem;
+  color: var(--ink);
+  border-radius: 8px;
+}
+
+.collage-title .c1 {
+  background: var(--pink-bright);
+}
+.collage-title .c2 {
+  background: #e8d88a;
+}
+.collage-title .c3 {
+  background: #c4a8dd;
+}
+.collage-title .c4 {
+  background: #8cc8e0;
+}
+
+.hero__sub {
+  font-size: 1.05rem;
+  font-weight: 600;
+  max-width: 36ch;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* Обёртка фото: колонка выше текста, картинка прижата снизу и масштабируется вверх — заполняет зону над головой */
+.hero__figure {
+  margin: 0;
+  /* Поднимаем колонку с фото, чтобы ниже в экране читался следующий блок */
+  margin-top: -2.25rem;
+  border-radius: 0;
+  overflow: visible;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  align-self: stretch;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: clamp(280px, 52vh, 600px);
+}
+
+@media (min-width: 768px) {
+  .hero__figure {
+    max-width: none;
+    min-height: clamp(340px, 58vh, 640px);
+    margin-top: -4.5rem;
+  }
+}
+
+/* Крупнее и выше: высота от контейнера, привязка к низу; лёгкий upscale по ширине */
+.hero__img {
+  display: block;
+  width: auto;
+  max-width: min(128%, 920px);
+  height: 100%;
+  max-height: min(78vh, 700px);
+  margin: 0 auto;
+  object-fit: contain;
+  object-position: center bottom;
+  -webkit-mask-image: radial-gradient(ellipse 96% 94% at 50% 52%, #000 50%, transparent 100%);
+  mask-image: radial-gradient(ellipse 96% 94% at 50% 52%, #000 50%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  transform: translateY(-1.35rem);
+}
+
+@media (min-width: 768px) {
+  .hero__img {
+    max-width: min(135%, 960px);
+    max-height: min(72vh, 660px);
+    /* Сильнее вверх — освобождаем место для рваной полосы и тёмной карточки */
+    transform: translateY(-3.25rem) scale(1.06);
+    transform-origin: center bottom;
+  }
+}
+
+/* Полноширинный «рваный» переход: цвет заливки = нижний блок (currentColor) */
+.torn-edge {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  line-height: 0;
+  color: var(--ink);
+}
+
+.torn-edge svg {
+  display: block;
+  width: 100%;
+  height: clamp(36px, 6vw, 56px);
+}
+
+.torn-edge--to-dark {
+  color: var(--ink);
+}
+
+/* Стык без зазора и без скругления сверху у тёмной панели после рваной кромки */
+.panel--after-torn {
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Сетка «О формате»: текст и изображение рядом на широком экране */
+.format-layout {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (min-width: 720px) {
+  .format-layout {
+    grid-template-columns: 1fr minmax(200px, 38%);
+  }
+}
+
+.format-layout__text {
+  min-width: 0;
+}
+
+.format-layout__figure {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--pink-bright);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.format-layout__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Полноширинное фото под сеткой на странице «О формате» */
+.format-layout__bottom-figure {
+  margin: 1.5rem 0 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--pink-bright);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.format-layout__bottom-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Списки с ромбами */
+.list-diamond {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list-diamond li {
+  position: relative;
+  padding-left: 1.35rem;
+  margin-bottom: 0.55rem;
+}
+
+.list-diamond li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--pink-bright);
+  transform: rotate(45deg);
+}
+
+.panel--dark .list-diamond li::before {
+  background: var(--pink-soft);
+}
+
+/* Нумерованный маркер-стикер */
+.num-row {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.num-badge {
+  flex: 0 0 auto;
+  min-width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-weight: 900;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: #f0dc7a;
+}
+
+.num-badge--pink {
+  background: var(--pink-soft);
+}
+.num-badge--muted {
+  background: #c4c4c4;
+}
+.num-badge--blue {
+  background: #8cc8e0;
+}
+
+/* Сетка тарифов */
+.tariff-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 720px) {
+  .tariff-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Карточка тарифа */
+.tariff-card {
+  background: var(--ink);
+  color: var(--text-on-dark);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.tariff-card .spots {
+  text-align: center;
+  font-weight: 700;
+  margin: 1rem 0;
+}
+
+.tariff-price {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: var(--radius);
+  background: var(--magenta-deep);
+  text-align: center;
+}
+
+.tariff-price strong {
+  font-size: 1.75rem;
+}
+
+.tariff-price del {
+  opacity: 0.85;
+  margin-left: 0.35rem;
+}
+
+.tariff-price small {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+}
+
+/* Секция «об авторе»: две колонки */
+.about-grid {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (min-width: 800px) {
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.about-photo {
+  border-radius: 20px;
+  min-height: 280px;
+  background: linear-gradient(160deg, var(--pink-bright), var(--magenta-deep));
+  border: 4px solid #fff;
+  box-shadow: var(--shadow);
+  clip-path: polygon(8% 0, 100% 0, 100% 88%, 92% 100%, 0 100%, 0 12%);
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Заполнение рамки «Об авторе» реальным фото без искажений */
+.about-photo__img {
+  display: block;
+  width: 100%;
+  min-height: 280px;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Блок с эмодзи-рубрикой */
+.emoji-block {
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.emoji-block h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
+
+/* Предупреждение на странице исключения */
+.notice-box {
+  border-left: 6px solid var(--magenta-deep);
+  padding: 1rem 1.1rem;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* Картинка под текстом на странице «Исключение с канала» */
+.exclusion-page__figure {
+  margin: 1.5rem 0 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.exclusion-page__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Заголовок тарифов в стиле стикеров */
+.tariffs-hero-title {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
+  margin: 1.5rem 0 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.tariffs-hero-title li {
+  padding: 0.35rem 0.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  color: var(--ink);
+  border-radius: 8px;
+}
+
+.tariffs-hero-title .s1 {
+  background: var(--pink-bright);
+}
+.tariffs-hero-title .s2 {
+  background: #c4a8dd;
+}
+.tariffs-hero-title .s3 {
+  background: #e8d88a;
+}
+.tariffs-hero-title .s4 {
+  background: #8cc8e0;
+}
+
+.anchor-target {
+  scroll-margin-top: 5rem;
+}
+
+/* Рамка вокруг целого модуля на странице программы: отделяет «Макияж» и «Причёски» в общей палитре */
+.program-module {
+  position: relative;
+  overflow: visible;
+  padding: 1.2rem 1rem 1.45rem;
+  margin-top: 1.5rem;
+  border-radius: calc(var(--radius) + 6px);
+  border: 3px solid transparent;
+}
+
+/* Верхний отступ задаётся обёртке: первый блок ближе к заголовку «Программа модулей» */
+.program-module-wrap {
+  margin-top: 1.5rem;
+}
+
+#program > .program-module-wrap:first-of-type {
+  margin-top: 0.75rem;
+}
+
+.program-module-wrap .program-module {
+  margin-top: 0;
+}
+
+.program-module:first-of-type {
+  margin-top: 0;
+}
+
+/* Модуль «Макияж»: оттенки вокруг #f68fd9 */
+.program-module--makeup {
+  border-color: #c75bb8;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.65) 0%,
+    rgba(253, 215, 242, 0.5) 48%,
+    rgba(255, 250, 252, 0.65) 100%
+  );
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.55) inset,
+    0 12px 34px rgba(125, 47, 111, 0.18);
+}
+
+/* Модуль «Причёски»: чуть более сиреневый контур при том же фоне страницы */
+.program-module--hair {
+  border-color: #9a5cb0;
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(240, 220, 250, 0.45) 45%,
+    rgba(255, 240, 252, 0.55) 100%
+  );
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+    0 12px 34px rgba(90, 40, 100, 0.16);
+}
+
+/* Первая карточка модуля — чёрный «шапка» с белой обводкой под заголовок с рваной плашкой */
+.program-module > .panel.panel--dark:first-of-type {
+  border: 3px solid #fff;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Обёртки модулей: только центрирование карточки (боковые фото убраны) */
+.program-module-wrap--makeup .program-module,
+.program-module-wrap--hair .program-module {
+  max-width: min(100%, 52rem);
+  margin-left: auto;
+  margin-right: auto;
+}
