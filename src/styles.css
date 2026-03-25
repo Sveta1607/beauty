@@ -607,3 +607,137 @@ body > script {
   outline: 2px solid var(--accent-cta-end);
   outline-offset: 1px;
 }
+
+/* Модальное окно тарифов: шире формы заявки, сетка карточек в стиле сайта */
+.tariffs-dialog {
+  width: calc(100% - 1.5rem);
+  max-width: 52rem;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.tariffs-dialog::backdrop {
+  background: rgba(58, 42, 48, 0.45);
+}
+
+.tariffs-dialog__inner {
+  padding: 1.35rem 1.15rem 1.5rem;
+}
+
+@media (min-width: 480px) {
+  .tariffs-dialog__inner {
+    padding: 1.5rem 1.5rem 1.65rem;
+  }
+}
+
+.tariffs-dialog__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.tariffs-dialog__subtitle {
+  margin: 0 0 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  color: rgba(58, 42, 48, 0.65);
+}
+
+/* Три тарифа: колонка на узком экране, сетка на широком */
+.tariffs-dialog__grid {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .tariffs-dialog__grid {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+  }
+}
+
+/* Карточка тарифа — как панель на главной */
+.tariffs-dialog__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 1.15rem 1rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(58, 42, 48, 0.1);
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(58, 42, 48, 0.06);
+}
+
+.tariffs-dialog__card--featured {
+  border-color: rgba(184, 136, 154, 0.55);
+  box-shadow: 0 6px 22px rgba(184, 107, 122, 0.12);
+}
+
+.tariffs-dialog__badge {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-on-dark);
+  background: linear-gradient(95deg, var(--accent-cta), var(--accent-cta-end));
+}
+
+.tariffs-dialog__period {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.tariffs-dialog__card--featured .tariffs-dialog__period {
+  margin-top: 0.35rem;
+}
+
+.tariffs-dialog__price {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: rgba(58, 42, 48, 0.75);
+}
+
+.tariffs-dialog__amount {
+  font-size: 1.65rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: var(--accent-cta);
+}
+
+.tariffs-dialog__cta {
+  margin-top: auto;
+  width: 100%;
+  max-width: 16rem;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.tariffs-dialog__close {
+  display: flex;
+  width: 100%;
+  max-width: 12rem;
+  margin: 0 auto;
+  justify-content: center;
+}

@@ -2,6 +2,8 @@
 import './styles.css'
 // Форма «Оставить заявку» на главной (если разметки нет — скрипт ничего не делает)
 import './lead-form.js'
+// Окно тарифов по кнопке «Оплатить»
+import './pay-tariffs.js'
 
 const toggle = document.querySelector('.nav-toggle')
 const nav = document.querySelector('.site-nav')
