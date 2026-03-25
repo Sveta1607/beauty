@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Локальные заявки с формы (JSON Lines), не коммитим персональные данные
+data/contacts.jsonl
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

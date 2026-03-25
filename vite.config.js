@@ -14,6 +14,13 @@ export default defineConfig({
     port: 24680,
     strictPort: false,
     open: '/index.html',
+    // Прокси /api на Express — фронт может вызывать fetch('/api/...') без CORS-проблем в dev
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:8787',
+        changeOrigin: true,
+      },
+    },
   },
   build: {
     rollupOptions: {
