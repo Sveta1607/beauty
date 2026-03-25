@@ -6,7 +6,6 @@ export const siteInfo = {
   locale: 'ru',
   pages: [
     { slug: 'index', path: '/index.html', title: 'Beauty University', navLabel: 'Beauty University' },
-    { slug: 'format', path: '/format.html', title: 'О формате', navLabel: 'О формате' },
     { slug: 'awaiting', path: '/awaiting.html', title: 'Что тебя ждёт', navLabel: 'Что тебя ждёт' },
     { slug: 'exclusion', path: '/exclusion.html', title: 'Исключение с канала', navLabel: 'Исключение с канала' },
   ],

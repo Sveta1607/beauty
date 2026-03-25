@@ -1,16 +1,19 @@
-/* Глобальные токены: единый фирменный розовый #f68fd9 и спокойные акценты для шапки и кнопок */
+/* Глобальные токены: нежный пудровый фон (#ffc0cb) и приглушённые розовые акценты без агрессивного контраста */
 :root {
-  --pink-bright: #f68fd9;
-  --pink-soft: #fdd7f2;
-  --magenta-deep: #b84aa8;
-  --magenta-dark: #7d2f6f;
-  --ink: #1a1216;
-  --paper: #fff8fd;
-  --text-on-dark: #ffffff;
-  --footer-bg: #5c2860;
+  --powder: #ffc0cb;
+  --rose-header-start: #cfa0ad;
+  --rose-header-end: #b8889a;
+  --pink-bright: #f0b8c4;
+  --pink-soft: #fff5f7;
+  --accent-cta: #b86b7a;
+  --accent-cta-end: #d492a0;
+  --ink: #3a2a30;
+  --paper: #fffafb;
+  --text-on-dark: #fffafb;
+  --footer-bg: #a87888;
   --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, Cantarell, sans-serif;
-  --radius: 14px;
-  --shadow: 0 12px 32px rgba(93, 35, 88, 0.2);
+  --radius: 12px;
+  --shadow: 0 8px 28px rgba(58, 42, 48, 0.1);
 }
 
 /* Сброс бокса и базовая типографика для всего сайта */
@@ -35,7 +38,7 @@ body {
   flex-direction: column;
   font-family: var(--font-sans);
   color: var(--ink);
-  background: var(--pink-bright);
+  background: var(--powder);
   line-height: 1.55;
 }
 
@@ -83,9 +86,9 @@ body > script {
   justify-content: flex-start;
   gap: 0.75rem 1rem;
   padding: 0.85rem 1.25rem;
-  background: linear-gradient(135deg, var(--magenta-deep), var(--magenta-dark));
+  background: linear-gradient(135deg, var(--rose-header-start), var(--rose-header-end));
   color: var(--text-on-dark);
-  box-shadow: 0 5px 22px rgba(74, 10, 45, 0.28);
+  box-shadow: 0 4px 18px rgba(58, 42, 48, 0.12);
 }
 
 /* Бренд в шапке — ссылка на главную */
@@ -186,48 +189,45 @@ body > script {
   }
 }
 
-/* Подвал сайта: отступ сверху от контента на длинных страницах; позиция внизу задаётся flex у body + main */
-/* Подвал: тёмный фон; сверху «рваный» срез от цвета страницы через псевдоэлемент */
+/* Подвал: ровная граница с основным фоном, без зигзага */
 .site-footer {
-  position: relative;
-  margin-top: 3.25rem;
+  margin-top: 2.5rem;
   padding: 1.75rem 1.25rem 2rem;
   background: var(--footer-bg);
   color: var(--pink-soft);
   text-align: center;
   font-size: 0.85rem;
-}
-
-.site-footer::before {
-  content: '';
-  display: block;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  height: clamp(40px, 7vw, 56px);
-  margin-top: calc(-1 * clamp(40px, 7vw, 56px));
-  margin-bottom: 1.25rem;
-  line-height: 0;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 56' preserveAspectRatio='none'%3E%3Cpath fill='%235c2860' d='M0,18 L75,6 L150,22 L225,8 L300,24 L375,10 L450,26 L525,12 L600,20 L675,8 L750,24 L825,14 L900,22 L975,10 L1050,26 L1125,16 L1200,20 L1200,56 L0,56 Z'/%3E%3C/svg%3E")
-    no-repeat center / 100% 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .site-footer a {
   color: var(--text-on-dark);
 }
 
-/* Карточка/секция на светлом фоне */
+/* Карточка/секция на светлом фоне — лаконичная, с лёгкой обводкой */
 .panel {
   background: var(--paper);
   border-radius: var(--radius);
   padding: 1.5rem 1.35rem;
   margin-top: 1.25rem;
   box-shadow: var(--shadow);
+  border: 1px solid rgba(58, 42, 48, 0.08);
 }
 
-/* Тёмная полоса как на референсе (уроки) */
+/* Тёмная панель (если понадобится на других страницах) */
 .panel--dark {
   background: var(--ink);
   color: var(--text-on-dark);
+  border-color: transparent;
+}
+
+/* Блок «для кого» на главной: фон #b8889a (как акцент шапки), светлый текст */
+.panel--home-audience {
+  margin-top: 2rem;
+  background: #b8889a;
+  color: var(--text-on-dark);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 6px 20px rgba(58, 42, 48, 0.12);
 }
 
 /* Заголовок страницы */
@@ -270,8 +270,8 @@ body > script {
   cursor: pointer;
   text-decoration: none;
   color: var(--text-on-dark);
-  background: linear-gradient(95deg, var(--magenta-deep), var(--pink-bright));
-  box-shadow: 0 6px 20px rgba(93, 35, 88, 0.28);
+  background: linear-gradient(95deg, var(--accent-cta), var(--accent-cta-end));
+  box-shadow: 0 6px 18px rgba(58, 42, 48, 0.15);
 }
 
 .btn:hover {
@@ -332,23 +332,55 @@ body > script {
   border-radius: 8px;
 }
 
+/* Плитки букв BEAUTY — мягкие пастельные акценты в тон пудровой палитре */
 .collage-title .c1 {
-  background: var(--pink-bright);
+  background: #f5c4ce;
 }
 .collage-title .c2 {
-  background: #e8d88a;
+  background: #ebe0d4;
 }
 .collage-title .c3 {
-  background: #c4a8dd;
+  background: #dcc8e0;
 }
 .collage-title .c4 {
-  background: #8cc8e0;
+  background: #c8dde8;
 }
 
+/* Вводный блок героя: несколько абзацев под заголовком */
 .hero__sub {
   font-size: 1.05rem;
   font-weight: 600;
-  max-width: 36ch;
+  max-width: 48ch;
+}
+
+.hero__sub p {
+  margin: 0 0 0.85em;
+}
+
+.hero__sub p:last-child {
+  margin-bottom: 0;
+}
+
+/* Заголовок секции «для кого» в акцентном начертании, как на макете */
+.section-title--audience {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+}
+
+/* Список аудитории на цветной панели главной */
+.home-audience-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style-type: disc;
+}
+
+.home-audience-list li {
+  margin-bottom: 0.85em;
+}
+
+.home-audience-list li:last-child {
+  margin-bottom: 0;
 }
 
 .hero__actions {
@@ -414,7 +446,7 @@ body > script {
   mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
-  filter: drop-shadow(0 0 1.75rem rgba(246, 143, 217, 0.55));
+  filter: drop-shadow(0 0 1.5rem rgba(184, 107, 122, 0.35));
   transform: none;
 }
 
@@ -425,62 +457,6 @@ body > script {
     transform: scale(1.04);
     transform-origin: center bottom;
   }
-}
-
-/* Полноширинный «рваный» переход: цвет заливки = нижний блок (currentColor) */
-.torn-edge {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  line-height: 0;
-  color: var(--ink);
-}
-
-.torn-edge svg {
-  display: block;
-  width: 100%;
-  height: clamp(36px, 6vw, 56px);
-}
-
-.torn-edge--to-dark {
-  color: var(--ink);
-}
-
-/* Стык без зазора и без скругления сверху у тёмной панели после рваной кромки */
-.panel--after-torn {
-  margin-top: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-/* Сетка «О формате»: текст и изображение рядом на широком экране */
-.format-layout {
-  display: grid;
-  gap: 1.5rem;
-  align-items: start;
-}
-
-@media (min-width: 720px) {
-  .format-layout {
-    grid-template-columns: 1fr minmax(200px, 38%);
-  }
-}
-
-.format-layout__text {
-  min-width: 0;
-}
-
-.format-layout__figure {
-  margin: 0;
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--pink-bright);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-}
-
-.format-layout__img {
-  display: block;
-  width: 100%;
-  height: auto;
 }
 
 /* Блок с эмодзи-рубрикой */
@@ -499,7 +475,7 @@ body > script {
 
 /* Предупреждение на странице исключения */
 .notice-box {
-  border-left: 6px solid var(--magenta-deep);
+  border-left: 6px solid var(--accent-cta);
   padding: 1rem 1.1rem;
   background: rgba(255, 255, 255, 0.65);
   border-radius: 0 var(--radius) var(--radius) 0;

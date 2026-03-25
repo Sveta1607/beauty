@@ -21,7 +21,6 @@
       </button>
       <nav id="site-nav" class="site-nav" aria-label="Основная навигация">
         <a href="index.html" aria-current="page">Beauty University</a>
-        <a href="format.html">О формате</a>
         <a href="awaiting.html">Что тебя ждёт</a>
         <a href="exclusion.html">Исключение с канала</a>
       </nav>
@@ -37,13 +36,22 @@
             <span class="c2">T</span><span class="c1">Y</span>
           </p>
           <h1 id="hero-heading" class="page-title page-title--on-hero" style="margin-top: 0">Beauty University</h1>
-          <p class="hero__sub">
-            Онлайн-пространство, где вы спокойно разбираетесь в макияже, причёсках, уходе и стиле — в ритме
-            закрытого канала и живого комьюнити.
-          </p>
+          <!-- Вводный текст под заголовком: описание формата канала (несколько абзацев) -->
+          <div class="hero__sub">
+            <p>Обучающий закрытый канал, где вы будете погружаться в мир ухода за собой, макияжа, красивых волос и стиля.</p>
+            <p>
+              Каждую неделю вас будет ждать обучающий видеоматериал, а также вдохновляющие и полезные посты, тренирующие
+              насмотренность.
+            </p>
+            <p>
+              А также прямые эфиры и уроки от других спикеров (профстилист, врач-косметолог, парикмахер-колорист и т.д.).
+            </p>
+            <p>Неспешный темп обеспечит глубинное изучение материала и при этом не будет отвлекать от ваших повседневных дел.</p>
+          </div>
           <div class="hero__actions">
-            <a class="btn" href="format.html">Узнать формат</a>
-            <a class="btn btn--ghost" href="awaiting.html">Что тебя ждёт</a>
+            <!-- Ссылка на оплату: замените href на URL платёжной страницы или виджета -->
+            <a class="btn" href="#">Оплатить</a>
+            <a class="btn btn--ghost" href="awaiting.html">Подробности</a>
           </div>
         </div>
         <figure class="hero__figure">
@@ -58,27 +66,23 @@
         </figure>
       </section>
 
-      <!-- Рваный срез между ярким фоном страницы и тёмной карточкой (как на референсе) -->
-      <div class="torn-edge torn-edge--to-dark" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 56" preserveAspectRatio="none" focusable="false">
-          <path
-            fill="currentColor"
-            d="M0,18 L75,6 L150,22 L225,8 L300,24 L375,10 L450,26 L525,12 L600,20 L675,8 L750,24 L825,14 L900,22 L975,10 L1050,26 L1125,16 L1200,20 L1200,56 L0,56 Z"
-          />
-        </svg>
-      </div>
-
-      <!-- Краткий тизер: зачем заходить дальше -->
-      <section class="panel panel--dark panel--after-torn" aria-labelledby="teaser-title">
-        <h2 id="teaser-title" class="section-title">Зачем это вам</h2>
-        <p>
-          Каждую неделю — практичные видео и вдохновляющие материалы: от базового макияжа и укладок до насмотренности
-          и своего стиля. Темп спокойный, без выгорания — можно совмещать с работой и бытом.
-        </p>
-        <p style="margin-bottom: 0">
-          Начните с разделов <a href="format.html" style="color: var(--pink-soft)">«О формате»</a> и
-          <a href="awaiting.html" style="color: var(--pink-soft)">«Что тебя ждёт»</a> — там всё подробно.
-        </p>
+      <!-- Блок «для кого»: светлая карточка на пудровом фоне, без декоративных «рваных» кромок -->
+      <section class="panel panel--home-audience" aria-labelledby="audience-title">
+        <h2 id="audience-title" class="section-title section-title--audience">Для кого это обучение:</h2>
+        <ul class="home-audience-list">
+          <li>
+            В первую очередь для девушек, которые не особо умеют краситься и делать прически. Все уроки максимально
+            простые, но эффектные (повторить сможет каждая).
+          </li>
+          <li>Для тех, кто УМЕЕТ, но хочет узнать намного больше о косметике и способах её нанесения.</li>
+          <li>
+            Для тех, кто любит моду и хочет побольше узнать о стиле, сочетаниях в одежде и подборе аксессуаров.
+          </li>
+          <li>
+            Для опытных мастеров формат тоже будет полезен, т. к. приёмы с уроков можно использовать для клиентов и
+            повышать насмотренность.
+          </li>
+        </ul>
       </section>
     </main>
 

@@ -26,7 +26,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        format: resolve(__dirname, 'format.html'),
         awaiting: resolve(__dirname, 'awaiting.html'),
         exclusion: resolve(__dirname, 'exclusion.html'),
       },
