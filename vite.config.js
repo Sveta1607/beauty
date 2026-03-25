@@ -21,8 +21,6 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         format: resolve(__dirname, 'format.html'),
         awaiting: resolve(__dirname, 'awaiting.html'),
-        tariffs: resolve(__dirname, 'tariffs.html'),
-        about: resolve(__dirname, 'about.html'),
         exclusion: resolve(__dirname, 'exclusion.html'),
       },
     },
