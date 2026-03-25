@@ -123,16 +123,25 @@
         </label>
         <label class="lead-dialog__field">
           <span class="lead-dialog__label">Телефон</span>
-          <input
-            class="lead-dialog__input"
-            name="phone"
-            type="tel"
-            inputmode="tel"
-            autocomplete="tel"
-            required
-            maxlength="22"
-            placeholder="+7 …"
-          />
+          <!-- +7 фиксирован; пользователь вводит только 10 цифр (итого номер вида +79513451212) -->
+          <div class="lead-dialog__phone-row">
+            <span class="lead-dialog__phone-prefix">+7</span>
+            <input
+              class="lead-dialog__input lead-dialog__input--phone"
+              id="lead-phone-local"
+              name="phoneLocal"
+              type="tel"
+              inputmode="numeric"
+              autocomplete="tel-national"
+              required
+              maxlength="10"
+              minlength="10"
+              pattern="[0-9]{10}"
+              placeholder="9513451212"
+              aria-describedby="lead-phone-hint"
+            />
+          </div>
+          <span class="lead-dialog__hint" id="lead-phone-hint">10 цифр без +7</span>
         </label>
         <label class="lead-dialog__field">
           <span class="lead-dialog__label">Email</span>
@@ -143,6 +152,7 @@
             autocomplete="email"
             required
             maxlength="120"
+            placeholder="email@mail.ru"
           />
         </label>
         <div class="lead-dialog__actions">

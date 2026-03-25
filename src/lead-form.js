@@ -5,7 +5,17 @@ const form = document.getElementById('lead-form')
 const cancelBtn = document.getElementById('lead-cancel-btn')
 const statusEl = document.getElementById('lead-form-status')
 
+// Оставляем в поле телефона только цифры, максимум 10 (префикс +7 подставляем при отправке)
+const phoneLocalInput = document.getElementById('lead-phone-local')
+
 if (dialog && openBtn && form && cancelBtn && statusEl) {
+  if (phoneLocalInput) {
+    phoneLocalInput.addEventListener('input', () => {
+      const digits = phoneLocalInput.value.replace(/\D/g, '').slice(0, 10)
+      phoneLocalInput.value = digits
+    })
+  }
+
   openBtn.addEventListener('click', () => {
     statusEl.textContent = ''
     const submitBtn = document.getElementById('lead-submit-btn')
@@ -20,11 +30,19 @@ if (dialog && openBtn && form && cancelBtn && statusEl) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault()
     const fd = new FormData(form)
+    const localDigits = String(fd.get('phoneLocal') ?? '').replace(/\D/g, '').slice(0, 10)
+    const phone = localDigits.length === 10 ? `+7${localDigits}` : ''
+
     const body = {
       firstName: String(fd.get('firstName') ?? '').trim(),
       lastName: String(fd.get('lastName') ?? '').trim(),
-      phone: String(fd.get('phone') ?? '').trim(),
+      phone,
       email: String(fd.get('email') ?? '').trim(),
+    }
+
+    if (phone.length !== 12) {
+      statusEl.textContent = 'Введите 10 цифр мобильного номера.'
+      return
     }
 
     const submitBtn = document.getElementById('lead-submit-btn')

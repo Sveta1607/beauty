@@ -568,3 +568,49 @@ body > script {
   justify-content: flex-end;
   margin-top: 0.25rem;
 }
+
+/* Строка телефона: неизменяемый +7 и поле на 10 цифр */
+.lead-dialog__phone-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid rgba(58, 42, 48, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.lead-dialog__phone-prefix {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 0.5rem 0.55rem 0.75rem;
+  font: inherit;
+  font-weight: 700;
+  color: var(--ink);
+  background: rgba(58, 42, 48, 0.06);
+  border-right: 1px solid rgba(58, 42, 48, 0.12);
+  user-select: none;
+}
+
+.lead-dialog__input--phone {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.lead-dialog__input--phone:focus {
+  outline: none;
+}
+
+.lead-dialog__phone-row:focus-within {
+  outline: 2px solid var(--accent-cta-end);
+  outline-offset: 1px;
+}
+
+/* Подсказка под телефоном */
+.lead-dialog__hint {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(58, 42, 48, 0.55);
+}
