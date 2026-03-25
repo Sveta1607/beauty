@@ -5,8 +5,19 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
-/** Файл накопления заявок; в git не коммитим (см. .gitignore) */
-const CONTACTS_FILE = path.join(__dirname, '..', 'data', 'contacts.jsonl')
+/**
+ * Путь к файлу заявок: локально — `data/contacts.jsonl`; на Amvera — абсолютный путь в смонтированном томе `/data`.
+ * CONTACTS_FILE — полный путь к файлу; PERSISTENT_DATA_DIR — каталог (файл будет contacts.jsonl внутри него).
+ */
+function resolveContactsFilePath() {
+  const explicit = process.env.CONTACTS_FILE?.trim()
+  if (explicit) return explicit
+  const persistentDir = process.env.PERSISTENT_DATA_DIR?.trim()
+  if (persistentDir) return path.join(persistentDir, 'contacts.jsonl')
+  return path.join(__dirname, '..', 'data', 'contacts.jsonl')
+}
+
+const CONTACTS_FILE = resolveContactsFilePath()
 
 /**
  * Добавляет запись обращения с меткой времени UTC.

@@ -1,0 +1,11 @@
+# Исключаем из контекста сборки Docker: ускорение и отсутствие секретов/мусора в образе
+node_modules
+dist
+.git
+.gitignore
+data/contacts.jsonl
+.env
+.env.*
+*.local
+.cursor
+README.md

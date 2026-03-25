@@ -1,0 +1,8 @@
+# Конфигурация Amvera Cloud: порт контейнера и примонтированное постоянное хранилище для заявок
+# Документация: https://docs.amvera.ru/applications/configuration/docker.html
+
+run:
+  # Должен совпадать с PORT в Dockerfile (по умолчанию у Amvera ожидается 80)
+  containerPort: 80
+  # Каталог Data из личного кабинета монтируется здесь — contacts.jsonl не пропадёт при пересборке
+  persistenceMount: /data
