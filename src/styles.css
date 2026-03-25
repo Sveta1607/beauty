@@ -607,10 +607,3 @@ body > script {
   outline: 2px solid var(--accent-cta-end);
   outline-offset: 1px;
 }
-
-/* Подсказка под телефоном */
-.lead-dialog__hint {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: rgba(58, 42, 48, 0.55);
-}
