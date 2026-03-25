@@ -483,21 +483,6 @@ body > script {
   height: auto;
 }
 
-/* Полноширинное фото под сеткой на странице «О формате» */
-.format-layout__bottom-figure {
-  margin: 1.5rem 0 0;
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--pink-bright);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-}
-
-.format-layout__bottom-img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 /* Блок с эмодзи-рубрикой */
 .emoji-block {
   margin-bottom: 1.25rem;
