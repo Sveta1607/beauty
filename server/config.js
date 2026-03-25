@@ -29,3 +29,31 @@ export function getAllowedOrigins() {
 export function shouldServeStatic() {
   return process.env.NODE_ENV === 'production' || process.env.SERVE_STATIC === '1'
 }
+
+/**
+ * Ящик для писем с заявок (временный дефолт; переопределяется LEADS_INBOX_EMAIL в .env / Amvera).
+ */
+export const LEADS_INBOX_EMAIL =
+  process.env.LEADS_INBOX_EMAIL?.trim() || 'Sharunkina2014@yandex.ru'
+
+/**
+ * Параметры SMTP (Яндекс: smtp.yandex.ru, порт 465, пароль приложения в SMTP_PASS).
+ * Если SMTP_USER/SMTP_PASS пусты — письмо не шлём, заявка только в файл.
+ */
+export function getSmtpConfig() {
+  const host = process.env.SMTP_HOST?.trim() || 'smtp.yandex.ru'
+  const port = Number(process.env.SMTP_PORT) || 465
+  const user = process.env.SMTP_USER?.trim() || ''
+  const pass = process.env.SMTP_PASS?.trim() || ''
+  return {
+    host,
+    port,
+    secure: port === 465,
+    auth: { user, pass },
+  }
+}
+
+export function isSmtpConfigured() {
+  const { auth } = getSmtpConfig()
+  return Boolean(auth.user && auth.pass)
+}

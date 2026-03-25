@@ -4,8 +4,10 @@ import cors from 'cors'
 import fs from 'node:fs'
 import { DIST_DIR, getAllowedOrigins, shouldServeStatic } from './config.js'
 import { siteInfo } from './siteInfo.js'
-import { contactBodySchema } from './schemas.js'
-import { appendContact } from './storage.js'
+import { applicationBodySchema, contactBodySchema } from './schemas.js'
+import { appendApplication, appendContact } from './storage.js'
+import { sendApplicationEmail } from './mail.js'
+import { isSmtpConfigured } from './config.js'
 
 /**
  * Создаёт настроенное Express-приложение (удобно для тестов без listen).
@@ -46,6 +48,32 @@ export function createApp() {
       }
       await appendContact(parsed.data)
       return res.status(201).json({ ok: true })
+    } catch (err) {
+      return next(err)
+    }
+  })
+
+  // Заявка с главной: имя, фамилия, телефон, email → файл + письмо (если настроен SMTP)
+  app.post('/api/application', async (req, res, next) => {
+    try {
+      const parsed = applicationBodySchema.safeParse(req.body)
+      if (!parsed.success) {
+        const msg = parsed.error.issues.map((i) => i.message).join('; ')
+        return res.status(400).json({ error: msg })
+      }
+      await appendApplication(parsed.data)
+      let emailed = false
+      if (isSmtpConfigured()) {
+        try {
+          emailed = await sendApplicationEmail(parsed.data)
+        } catch (mailErr) {
+          console.error('[mail]', mailErr.message)
+          return res.status(502).json({
+            error: 'Заявка сохранена, но письмо не отправилось. Попробуйте позже или напишите нам напрямую.',
+          })
+        }
+      }
+      return res.status(201).json({ ok: true, emailed })
     } catch (err) {
       return next(err)
     }

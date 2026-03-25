@@ -14,6 +14,7 @@ dist-ssr
 
 # Локальные заявки с формы (JSON Lines), не коммитим персональные данные
 data/contacts.jsonl
+data/applications.jsonl
 
 # Editor directories and files
 .vscode/*

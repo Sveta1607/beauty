@@ -51,6 +51,8 @@
           <div class="hero__actions">
             <!-- Ссылка на оплату: замените href на URL платёжной страницы или виджета -->
             <a class="btn" href="#">Оплатить</a>
+            <!-- Открывает модальное окно с формой заявки (см. #lead-dialog внизу страницы) -->
+            <button type="button" class="btn btn--ghost" id="lead-open-btn">Оставить заявку</button>
             <a class="btn btn--ghost" href="awaiting.html">Подробности</a>
           </div>
         </div>
@@ -91,6 +93,64 @@
       <p>© Beauty University</p>
       <p><a href="#">Публичная оферта</a> · <a href="#">Политика обработки персональных данных</a></p>
     </footer>
+
+    <!-- Диалог заявки: поля валидируются в браузере и на сервере -->
+    <dialog class="lead-dialog" id="lead-dialog" aria-labelledby="lead-dialog-title">
+      <form class="lead-dialog__form" id="lead-form">
+        <h2 id="lead-dialog-title" class="lead-dialog__title">Оставить заявку</h2>
+        <p class="lead-dialog__status" id="lead-form-status" role="status" aria-live="polite"></p>
+        <label class="lead-dialog__field">
+          <span class="lead-dialog__label">Имя</span>
+          <input
+            class="lead-dialog__input"
+            name="firstName"
+            type="text"
+            autocomplete="given-name"
+            required
+            maxlength="80"
+          />
+        </label>
+        <label class="lead-dialog__field">
+          <span class="lead-dialog__label">Фамилия</span>
+          <input
+            class="lead-dialog__input"
+            name="lastName"
+            type="text"
+            autocomplete="family-name"
+            required
+            maxlength="80"
+          />
+        </label>
+        <label class="lead-dialog__field">
+          <span class="lead-dialog__label">Телефон</span>
+          <input
+            class="lead-dialog__input"
+            name="phone"
+            type="tel"
+            inputmode="tel"
+            autocomplete="tel"
+            required
+            maxlength="22"
+            placeholder="+7 …"
+          />
+        </label>
+        <label class="lead-dialog__field">
+          <span class="lead-dialog__label">Email</span>
+          <input
+            class="lead-dialog__input"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            maxlength="120"
+          />
+        </label>
+        <div class="lead-dialog__actions">
+          <button type="button" class="btn btn--ghost" id="lead-cancel-btn">Отмена</button>
+          <button type="submit" class="btn" id="lead-submit-btn">Отправить</button>
+        </div>
+      </form>
+    </dialog>
 
     <script type="module" src="/src/nav.js"></script>
   </body>

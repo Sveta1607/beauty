@@ -498,3 +498,73 @@ body > script {
 .anchor-target {
   scroll-margin-top: 5rem;
 }
+
+/* Модальное окно заявки: фон затемнения и карточка в стиле сайта */
+.lead-dialog {
+  width: calc(100% - 2rem);
+  max-width: 420px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.lead-dialog::backdrop {
+  background: rgba(58, 42, 48, 0.45);
+}
+
+.lead-dialog__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.35rem 1.25rem 1.5rem;
+}
+
+.lead-dialog__title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Сообщения об ошибке отправки под заголовком */
+.lead-dialog__status {
+  margin: 0;
+  min-height: 1.35em;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #9a3d52;
+}
+
+.lead-dialog__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.lead-dialog__input {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid rgba(58, 42, 48, 0.2);
+  border-radius: 10px;
+  font: inherit;
+  background: #fff;
+  color: var(--ink);
+}
+
+.lead-dialog__input:focus {
+  outline: 2px solid var(--accent-cta-end);
+  outline-offset: 1px;
+}
+
+.lead-dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: flex-end;
+  margin-top: 0.25rem;
+}
