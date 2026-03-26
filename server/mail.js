@@ -4,7 +4,7 @@ import { getSmtpConfig, isSmtpConfigured, LEADS_INBOX_EMAIL } from './config.js'
 
 /**
  * Отправляет одно письмо с полями заявки. Требуются SMTP_USER и SMTP_PASS в окружении.
- * @param {{ firstName: string, lastName: string, phone: string, email: string }} data
+ * @param {{ firstName: string, lastName: string, phone: string, email: string, tariff?: string }} data
  * @throws при ошибке транспорта SMTP
  */
 export async function sendApplicationEmail(data) {
@@ -12,12 +12,21 @@ export async function sendApplicationEmail(data) {
     return false
   }
   const cfg = getSmtpConfig()
+  // Таймауты и TLS — стабильнее с Яндексом и облачными сетями
   const transporter = nodemailer.createTransport({
     host: cfg.host,
     port: cfg.port,
     secure: cfg.secure,
+    requireTLS: cfg.requireTLS === true,
     auth: cfg.auth,
+    connectionTimeout: 25_000,
+    greetingTimeout: 20_000,
+    tls: { minVersion: 'TLSv1.2' },
+    logger: process.env.SMTP_DEBUG === '1',
+    debug: process.env.SMTP_DEBUG === '1',
   })
+
+  const tariffLi = data.tariff ? `<li>Тариф: ${escapeHtml(data.tariff)}</li>` : ''
 
   const text = [
     'Новая заявка с сайта Beauty University',
@@ -25,7 +34,10 @@ export async function sendApplicationEmail(data) {
     `Фамилия: ${data.lastName}`,
     `Телефон: ${data.phone}`,
     `Email: ${data.email}`,
-  ].join('\n')
+    data.tariff ? `Тариф: ${data.tariff}` : '',
+  ]
+    .filter(Boolean)
+    .join('\n')
 
   const html = `<p>Новая заявка с сайта <strong>Beauty University</strong></p>
 <ul>
@@ -33,6 +45,7 @@ export async function sendApplicationEmail(data) {
 <li>Фамилия: ${escapeHtml(data.lastName)}</li>
 <li>Телефон: ${escapeHtml(data.phone)}</li>
 <li>Email: ${escapeHtml(data.email)}</li>
+${tariffLi}
 </ul>`
 
   await transporter.sendMail({

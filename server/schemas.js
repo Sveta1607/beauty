@@ -19,6 +19,12 @@ export const applicationBodySchema = z.object({
     .trim()
     .regex(/^\+7\d{10}$/, 'Введите 10 цифр номера после +7'),
   email: z.string().trim().email('Укажите корректный email'),
+  /** Текст тарифа при переходе с окна оплаты (необязательно) */
+  tariff: z
+    .string()
+    .max(160)
+    .optional()
+    .transform((v) => (v == null || v === '' ? undefined : v)),
 })
 
 /** Поля формы «связаться / заявка» с информационного сайта */

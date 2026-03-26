@@ -1,3 +1,5 @@
+// Подхватываем .env до импорта config (SMTP_* и прочие переменные для локального запуска)
+import 'dotenv/config'
 // Точка входа бэкенда: поднимаем HTTP-сервер на заданном порту
 import { createServer } from 'node:http'
 import { createApp } from './app.js'

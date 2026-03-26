@@ -98,6 +98,9 @@
     <dialog class="lead-dialog" id="lead-dialog" aria-labelledby="lead-dialog-title">
       <form class="lead-dialog__form" id="lead-form">
         <h2 id="lead-dialog-title" class="lead-dialog__title">Оставить заявку</h2>
+        <!-- Тексты ниже показываются только при открытии формы из окна тарифов (оплата) -->
+        <p id="lead-dialog-intro" class="lead-dialog__intro" hidden></p>
+        <p id="lead-tariff-context" class="lead-dialog__tariff-context" hidden></p>
         <p class="lead-dialog__status" id="lead-form-status" role="status" aria-live="polite"></p>
         <label class="lead-dialog__field">
           <span class="lead-dialog__label">Имя</span>
@@ -159,7 +162,7 @@
       </form>
     </dialog>
 
-    <!-- Окно тарифов: после создания платёжных ссылек в ЮKassa подставьте их в href у ссылок «Перейти к оплате» -->
+    <!-- Окно тарифов: подставьте реальные URL ЮKassa в data-pay-url у кнопок «Перейти к оплате» -->
     <dialog class="tariffs-dialog" id="tariffs-dialog" aria-labelledby="tariffs-dialog-title">
       <div class="tariffs-dialog__inner">
         <h2 id="tariffs-dialog-title" class="tariffs-dialog__title">Подписка Beauty University</h2>
@@ -168,21 +171,45 @@
           <li class="tariffs-dialog__card">
             <h3 class="tariffs-dialog__period">1 месяц</h3>
             <p class="tariffs-dialog__price"><span class="tariffs-dialog__amount">2 399</span> ₽</p>
-            <!-- href: платёжная ссылка ЮKassa на 2399 ₽ -->
-            <a class="btn tariffs-dialog__cta" href="#" target="_blank" rel="noopener noreferrer">Перейти к оплате</a>
+            <!-- data-pay-url: платёжная ссылка ЮKassa на 2399 ₽ -->
+            <button
+              type="button"
+              class="btn tariffs-dialog__cta"
+              data-tariff-pay
+              data-tariff-label="Подписка 1 мес. — 2 399 ₽"
+              data-pay-url="#"
+            >
+              Перейти к оплате
+            </button>
           </li>
           <li class="tariffs-dialog__card tariffs-dialog__card--featured">
             <span class="tariffs-dialog__badge">Выгодно</span>
             <h3 class="tariffs-dialog__period">3 месяца</h3>
             <p class="tariffs-dialog__price"><span class="tariffs-dialog__amount">5 599</span> ₽</p>
-            <!-- href: платёжная ссылка ЮKassa на 5599 ₽ -->
-            <a class="btn tariffs-dialog__cta" href="#" target="_blank" rel="noopener noreferrer">Перейти к оплате</a>
+            <!-- data-pay-url: платёжная ссылка ЮKassa на 5599 ₽ -->
+            <button
+              type="button"
+              class="btn tariffs-dialog__cta"
+              data-tariff-pay
+              data-tariff-label="Подписка 3 мес. — 5 599 ₽"
+              data-pay-url="#"
+            >
+              Перейти к оплате
+            </button>
           </li>
           <li class="tariffs-dialog__card">
             <h3 class="tariffs-dialog__period">6 месяцев</h3>
             <p class="tariffs-dialog__price"><span class="tariffs-dialog__amount">7 999</span> ₽</p>
-            <!-- href: платёжная ссылка ЮKassa на 7999 ₽ -->
-            <a class="btn tariffs-dialog__cta" href="#" target="_blank" rel="noopener noreferrer">Перейти к оплате</a>
+            <!-- data-pay-url: платёжная ссылка ЮKassa на 7999 ₽ -->
+            <button
+              type="button"
+              class="btn tariffs-dialog__cta"
+              data-tariff-pay
+              data-tariff-label="Подписка 6 мес. — 7 999 ₽"
+              data-pay-url="#"
+            >
+              Перейти к оплате
+            </button>
           </li>
         </ul>
         <button type="button" class="btn btn--ghost tariffs-dialog__close" id="pay-close-btn">Закрыть</button>

@@ -42,9 +42,20 @@ export const LEADS_INBOX_EMAIL =
  */
 export function getSmtpConfig() {
   const host = process.env.SMTP_HOST?.trim() || 'smtp.yandex.ru'
-  const port = Number(process.env.SMTP_PORT) || 465
+  let port = Number(process.env.SMTP_PORT)
+  if (!Number.isFinite(port) || port <= 0) port = 465
   const user = process.env.SMTP_USER?.trim() || ''
   const pass = process.env.SMTP_PASS?.trim() || ''
+  // Порт 587 — STARTTLS (иногда 465 блокируют на хостинге)
+  if (port === 587) {
+    return {
+      host,
+      port: 587,
+      secure: false,
+      requireTLS: true,
+      auth: { user, pass },
+    }
+  }
   return {
     host,
     port,

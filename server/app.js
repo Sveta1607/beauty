@@ -67,10 +67,9 @@ export function createApp() {
         try {
           emailed = await sendApplicationEmail(parsed.data)
         } catch (mailErr) {
-          console.error('[mail]', mailErr.message)
-          return res.status(502).json({
-            error: 'Заявка сохранена, но письмо не отправилось. Попробуйте позже или напишите нам напрямую.',
-          })
+          // Заявка уже в файле — клиенту отдаём успех; почту чинят по логам (SMTP, пароль приложения Яндекса и т.д.)
+          console.error('[mail] отправка не удалась:', mailErr.message)
+          if (mailErr.stack) console.error(mailErr.stack)
         }
       }
       return res.status(201).json({ ok: true, emailed })

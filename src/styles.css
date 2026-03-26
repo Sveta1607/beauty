@@ -530,6 +530,22 @@ body > script {
   letter-spacing: 0.04em;
 }
 
+/* Пояснение и строка тарифа — только при открытии из окна оплаты */
+.lead-dialog__intro {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: rgba(58, 42, 48, 0.72);
+}
+
+.lead-dialog__tariff-context {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--accent-cta);
+}
+
 /* Сообщения об ошибке отправки под заголовком */
 .lead-dialog__status {
   margin: 0;

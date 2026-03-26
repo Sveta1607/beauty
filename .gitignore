@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Секреты (SMTP и т.д.) — держите копию .env только у себя
+.env
+
 # Локальные заявки с формы (JSON Lines), не коммитим персональные данные
 data/contacts.jsonl
 data/applications.jsonl
