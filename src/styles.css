@@ -383,6 +383,18 @@ body > script {
   margin-bottom: 0;
 }
 
+/* Ссылки телефона и почты в блоке «Для связи» — читаемые на фоне #b8889a, как остальной текст панели */
+.panel--home-audience .home-contact-list a {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.panel--home-audience .home-contact-list a:hover {
+  opacity: 0.92;
+}
+
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
