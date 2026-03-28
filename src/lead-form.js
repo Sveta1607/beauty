@@ -9,6 +9,18 @@ const introEl = document.getElementById('lead-dialog-intro')
 const tariffCtxEl = document.getElementById('lead-tariff-context')
 
 const phoneLocalInput = document.getElementById('lead-phone-local')
+const privacyCheckbox = document.getElementById('lead-privacy-consent')
+
+/**
+ * Включает «Отправить» только при отмеченном согласии с политикой ПДн.
+ * Вызывается при открытии диалога, смене чекбокса и после ошибки отправки.
+ */
+function updateLeadSubmitEnabled() {
+  const submitBtn = document.getElementById('lead-submit-btn')
+  if (!submitBtn || !privacyCheckbox) return
+  submitBtn.disabled = !privacyCheckbox.checked
+  submitBtn.setAttribute('aria-disabled', submitBtn.disabled ? 'true' : 'false')
+}
 
 /** URL оплаты после успешной отправки; задаётся из окна тарифов */
 let pendingPaymentUrl = null
@@ -70,8 +82,8 @@ export function openLeadForPayment(payUrl, tariffLabel) {
   pendingPaymentUrl = payUrl && payUrl.trim() !== '' ? payUrl : '#'
   pendingTariffLabel = tariffLabel || ''
   statusEl.textContent = ''
-  const submitBtn = document.getElementById('lead-submit-btn')
-  if (submitBtn) submitBtn.disabled = false
+  if (privacyCheckbox) privacyCheckbox.checked = false
+  updateLeadSubmitEnabled()
   updateLeadDialogMode()
   safeShowModal(dialog)
 }
@@ -92,10 +104,14 @@ if (dialog && openBtn && form && cancelBtn && statusEl) {
     resetPaymentMode()
     updateLeadDialogMode()
     statusEl.textContent = ''
-    const submitBtn = document.getElementById('lead-submit-btn')
-    if (submitBtn) submitBtn.disabled = false
+    if (privacyCheckbox) privacyCheckbox.checked = false
+    updateLeadSubmitEnabled()
     safeShowModal(dialog)
   })
+
+  if (privacyCheckbox) {
+    privacyCheckbox.addEventListener('change', updateLeadSubmitEnabled)
+  }
 
   cancelBtn.addEventListener('click', () => {
     resetPaymentMode()
@@ -105,6 +121,10 @@ if (dialog && openBtn && form && cancelBtn && statusEl) {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault()
+    if (!privacyCheckbox?.checked) {
+      statusEl.textContent = 'Отметьте согласие с политикой обработки персональных данных.'
+      return
+    }
     const fd = new FormData(form)
     const localDigits = String(fd.get('phoneLocal') ?? '').replace(/\D/g, '').slice(0, 10)
     const phone = localDigits.length === 10 ? `+7${localDigits}` : ''
@@ -147,7 +167,7 @@ if (dialog && openBtn && form && cancelBtn && statusEl) {
         } else {
           statusEl.textContent = data.error || `Ошибка сервера (${res.status}). Попробуйте позже.`
         }
-        if (submitBtn) submitBtn.disabled = false
+        updateLeadSubmitEnabled()
         return
       }
 
@@ -175,7 +195,7 @@ if (dialog && openBtn && form && cancelBtn && statusEl) {
     } catch {
       statusEl.textContent =
         'Сервер API не отвечает. Если вы на компьютере: во втором терминале выполните «npm run server» (порт 8787), оставьте «npm run dev». На хостинге проверьте, что приложение Node запущено.'
-      if (submitBtn) submitBtn.disabled = false
+      updateLeadSubmitEnabled()
     }
   })
 }

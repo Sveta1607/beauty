@@ -212,9 +212,26 @@
             placeholder="email@mail.ru"
           />
         </label>
+        <!-- Согласие с политикой ПДн: без отметки кнопка «Отправить» остаётся неактивной -->
+        <div class="lead-dialog__field lead-dialog__field--consent">
+          <label class="lead-dialog__consent">
+            <input
+              type="checkbox"
+              id="lead-privacy-consent"
+              name="privacyConsent"
+              class="lead-dialog__checkbox"
+              autocomplete="off"
+            />
+            <span class="lead-dialog__consent-text">
+              Согласен(на) с
+              <a href="privacy.html" target="_blank" rel="noopener noreferrer">политикой обработки персональных данных</a>
+            </span>
+          </label>
+        </div>
         <div class="lead-dialog__actions">
           <button type="button" class="btn btn--ghost" id="lead-cancel-btn">Отмена</button>
-          <button type="submit" class="btn" id="lead-submit-btn">Отправить</button>
+          <!-- disabled до согласия с политикой; включается скриптом при отмеченном чекбоксе -->
+          <button type="submit" class="btn" id="lead-submit-btn" disabled>Отправить</button>
         </div>
       </form>
     </dialog>

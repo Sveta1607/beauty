@@ -285,6 +285,13 @@ body > script {
   box-shadow: none;
 }
 
+/* Основная кнопка в состоянии disabled — визуально отличима от активной (согласие с политикой не отмечено) */
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.12);
+}
+
 /* Герой главной: сетка текст + фото; колонки по высоте тянутся к самой высокой — под фото остаётся место сверху */
 .hero {
   display: grid;
@@ -573,6 +580,44 @@ body > script {
   gap: 0.35rem;
   font-size: 0.9rem;
   font-weight: 600;
+}
+
+/* Блок согласия с политикой: чекбокс и многострочный текст со ссылкой в одной строке на широких экранах */
+.lead-dialog__field--consent {
+  margin-top: -0.15rem;
+}
+
+.lead-dialog__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.lead-dialog__checkbox {
+  margin: 0.2rem 0 0;
+  width: 1.05rem;
+  height: 1.05rem;
+  flex-shrink: 0;
+  accent-color: var(--accent-cta);
+  cursor: pointer;
+}
+
+.lead-dialog__consent-text {
+  color: rgba(58, 42, 48, 0.88);
+}
+
+.lead-dialog__consent-text a {
+  color: var(--accent-cta);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.lead-dialog__consent-text a:hover {
+  color: var(--accent-cta-end);
 }
 
 .lead-dialog__input {
