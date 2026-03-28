@@ -28,6 +28,9 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         awaiting: resolve(__dirname, 'awaiting.html'),
         exclusion: resolve(__dirname, 'exclusion.html'),
+        // Юридические страницы — отдельные HTML-входы, чтобы попали в dist при сборке
+        offer: resolve(__dirname, 'offer.html'),
+        privacy: resolve(__dirname, 'privacy.html'),
       },
     },
   },

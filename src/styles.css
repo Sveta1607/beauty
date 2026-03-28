@@ -769,3 +769,87 @@ body > script {
   margin: 0 auto;
   justify-content: center;
 }
+
+/* Юридические страницы (оферта, политика): узкая колонка и читаемые отступы для длинного текста */
+.legal-doc {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Длинный заголовок оферты — без чрезмерного кегля и без полного uppercase */
+.legal-doc__title {
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+  line-height: 1.35;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-weight: 800;
+}
+
+/* Подзаголовки разделов политики/оферты — визуально ниже уровня h1 страницы */
+.legal-doc__h2 {
+  margin: 1.5rem 0 0.65rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+/* Горизонтальные разделители между крупными блоками, как «---» в исходном md */
+.legal-doc__rule {
+  margin: 1.35rem 0;
+  border: none;
+  border-top: 1px solid rgba(58, 42, 48, 0.12);
+}
+
+/* Списки в юридическом тексте — отступ слева для нумерации абзацев */
+.legal-doc__list {
+  margin: 0.5rem 0 1rem;
+  padding-left: 1.35rem;
+}
+
+/* Контакты оператора: без маркеров, только вертикальный ритм */
+.legal-doc__list--plain {
+  list-style: none;
+  padding-left: 0;
+}
+
+.legal-doc__list--plain li {
+  margin-bottom: 0.35rem;
+}
+
+/* Обёртка таблицы тарифов — горизонтальный скролл на узких экранах */
+.legal-doc__table-wrap {
+  overflow-x: auto;
+  margin: 0.75rem 0 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Таблица цен из оферты — лёгкая сетка в стиле остальных панелей */
+.legal-doc__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.legal-doc__table th,
+.legal-doc__table td {
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+  border: 1px solid rgba(58, 42, 48, 0.12);
+}
+
+.legal-doc__table th {
+  background: rgba(184, 107, 122, 0.12);
+  font-weight: 700;
+}
+
+/* Ссылки внутри юртекста — тот же акцент, что и у ссылок в контенте */
+.legal-doc a {
+  color: var(--accent-cta);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.legal-doc a:hover {
+  color: var(--accent-cta-end);
+}
